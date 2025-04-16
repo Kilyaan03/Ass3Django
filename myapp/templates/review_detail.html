@@ -1,0 +1,91 @@
+<!-- Display the review details -->
+<h2>{{ review.title }}</h2>
+<p><strong>Category:</strong> {{ review.category }}</p>
+<p><strong>By:</strong> {{ review.author }}</p>
+<p><strong>Rating:</strong> {{ review.rating }}/5</p>
+<p>{{ review.content }}</p>
+
+<hr>
+
+<!-- Section for showing comments -->
+<h3>Comments</h3>
+<ul id="comment-list">
+    <!-- At first, show a loading message until the comments are fetched -->
+    <li>Loading comments...</li>
+</ul>
+
+<!-- Section for adding a new comment -->
+<h4>Leave a Comment:</h4>
+<form id="comment-form">
+    <!-- Textbox where the user types their comment -->
+    <textarea id="comment-text" rows="3" required></textarea><br>
+    <!-- Button to send the comment -->
+    <button type="submit">Post Comment</button>
+</form>
+
+<script>
+/**
+ * This function gets the comments from the server.
+ * - It sends a GET request to the 'review_comments_json' endpoint.
+ * - Then it updates the comment list with the data it gets back.
+ */
+function loadComments() {
+    fetch("{% url 'review_comments_json' review.id %}") // Ask the server for the comments for this review.
+        .then(response => response.json()) // Turn the response into JSON.
+        .then(data => {
+            const list = document.getElementById('comment-list'); // Find the comment list in the HTML.
+            list.innerHTML = ''; // Clear out any old comments.
+            data.comments.forEach(comment => {
+                // For each comment, make a new list item.
+                const li = document.createElement('li');
+                li.innerText = `${comment.user__username}: ${comment.text}`; // Show the username and the comment text.
+                list.appendChild(li); // Add the comment to the list.
+            });
+        })
+        .catch(() => {
+            // If something goes wrong, show an error message.
+            document.getElementById('comment-list').innerHTML = '<li>Failed to load comments.</li>';
+        });
+}
+
+// Call loadComments when the page loads so the comments show up right away.
+window.onload = loadComments;
+
+/**
+ * This handles the form for adding a new comment.
+ * - Stops the page from refreshing when the form is submitted.
+ * - Sends the comment to the server with a POST request.
+ * - Reloads the comments if it works.
+ */
+document.getElementById('comment-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Stop the form from doing its normal thing (refreshing the page).
+
+    // Get the comment text from the textbox and remove any extra spaces.
+    const commentText = document.getElementById('comment-text').value.trim();
+
+    // Make sure the comment is at least 3 characters long.
+    if (commentText.length < 3) {
+        alert("Comment must be at least 3 characters."); // Tell the user if their comment is too short.
+        return;
+    }
+
+    // Send the comment to the server.
+    fetch("{% url 'add_comment_ajax' review.id %}", {
+        method: "POST", // Use POST because we're sending data.
+        headers: { "Content-Type": "application/json" }, // Tell the server we're sending JSON.
+        body: JSON.stringify({ text: commentText }) // Send the comment text as JSON.
+    })
+    .then(res => res.json()) // Turn the response into JSON.
+    .then(data => {
+        if (data.success) {
+            // If the server says it worked:
+            document.getElementById('comment-text').value = ''; // Clear the textbox.
+            loadComments(); // Reload the comments so the new one shows up.
+        } else {
+            // If there was an error, show it to the user.
+            alert(data.error || "Something went wrong");
+        }
+    })
+    .catch(() => alert("Failed to submit comment")); // If the request fails, show an error message.
+});
+</script>

@@ -1,0 +1,8 @@
+<h2>Edit Review</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+    <a href="{% url 'review_list' %}">Cancel</a>
+</form>

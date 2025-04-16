@@ -1,0 +1,21 @@
+{% if request.user.is_staff %}
+  <h2>Create Review</h2>
+  <form method="post" id="create-review-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    document.getElementById('create-review-form').addEventListener('submit', function(e) {
+      let rating = document.querySelector('[name="rating"]').value;
+      if (rating < 1 || rating > 5) {
+        alert("Rating must be between 1 and 5!");
+        e.preventDefault();
+      }
+    });
+  </script>
+
+{% else %}
+  <p>This section is for staff only.</p>
+{% endif %}

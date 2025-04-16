@@ -1,0 +1,12 @@
+<h2>All Reviews</h2>
+<a href="{% url 'create_review' %}">Write a new review</a>
+<ul>
+    {% for review in reviews %}
+        <li>
+            <strong>{{ review.title }}</strong> by {{ review.author }} ({{ review.rating }}/5)
+            <br>
+            <a href="{% url 'update_review' review.id %}">Edit</a> |
+            <a href="{% url 'delete_review' review.id %}">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
