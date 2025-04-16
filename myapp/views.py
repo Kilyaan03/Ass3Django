@@ -28,7 +28,7 @@ def create_review(request):
             review = form.save(commit=False)
             review.author = request.user  # Set the current user as the author.
             review.save()  # Save the review to the database.
-            return redirect('myapp/review_list')  # Redirect to the review list page.
+            return redirect('review_list')  # Redirect to the review list page.
     else:
         # If the request is not POST, display an empty form.
         form = ReviewForm()
@@ -44,7 +44,7 @@ def update_review(request, review_id):
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
             form.save()  # Save the updated review.
-            return redirect('myapp/review_list')  # Redirect to the review list page.
+            return redirect('review_list')  # Redirect to the review list page.
     else:
         # If the request is not POST, display the form with the current review data.
         form = ReviewForm(instance=review)
@@ -63,7 +63,7 @@ def delete_review(request, review_id):
     if request.method == 'POST':
         # If the form is submitted, delete the review and redirect to the review list.
         review.delete()
-        return redirect('myapp/review_list')
+        return redirect('review_list')
     
     # Render a confirmation page before deleting.
     return render(request, 'myapp/delete_review.html', {'review': review})
@@ -159,7 +159,7 @@ def register(request):
         if form.is_valid():
             user = form.save()  # Save the new user.
             login(request, user)  # Log the user in automatically.
-            return redirect('myapp/review_list')  # Redirect to the review list page.
+            return redirect('review_list')  # Redirect to the review list page.
     else:
         # If the request is not POST, display an empty registration form.
         form = RegisterForm()

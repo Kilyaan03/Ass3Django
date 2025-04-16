@@ -21,6 +21,8 @@ urlpatterns = [
     path('review/<int:review_id>/comments/add/', views.add_comment_ajax, name='add_comment_ajax'),
     path('register/', views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='myapp/login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='index'), name='logout'),
     path('base/', views.base, name='base'),
+    path('review_list', views.review_list, name='review_list'),
+    path('index', views.index, name='index'),
 ]
