@@ -143,16 +143,11 @@ def add_comment_ajax(request, review_id):
 
 def register(request):
     if request.method == 'POST':
-        print("POST received!")  # Add this
         form = RegisterForm(request.POST)
         if form.is_valid():
-            print("Form is valid!")  # Add this
             user = form.save()
             login(request, user)
             return redirect('review_list')
-        else:
-            print(form.errors)  # Add this
     else:
         form = RegisterForm()
-
     return render(request, 'register.html', {'form': form})
