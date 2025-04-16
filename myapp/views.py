@@ -7,72 +7,92 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from django.contrib.auth import login
 
-# Create your views here.
-
 # This is a simple view that returns a plain text response.
+# It's mainly used to test if the server is running correctly.
 def home(request):
     return HttpResponse("Hello Test works!")
 
+# View for creating a review.
+# Only staff members can access this view, and it requires the user to be logged in.
 @login_required
 def create_review(request):
     if not request.user.is_staff:
+        # If the user is not a staff member, they are forbidden from accessing this view.
         return HttpResponseForbidden("Only staff members can create reviews.")
 
     if request.method == 'POST':
+        # If the form is submitted, validate the data.
         form = ReviewForm(request.POST)
         if form.is_valid():
+            # Save the review but don't commit yet (to add the author).
             review = form.save(commit=False)
-            review.author = request.user
-            review.save()
-            return redirect('review_list')
+            review.author = request.user  # Set the current user as the author.
+            review.save()  # Save the review to the database.
+            return redirect('myapp/review_list')  # Redirect to the review list page.
     else:
+        # If the request is not POST, display an empty form.
         form = ReviewForm()
     return render(request, 'myapp/create_review.html', {'form': form})
 
+# View for updating an existing review.
 @login_required
 def update_review(request, review_id):
+    # Get the review by its ID or return a 404 error if it doesn't exist.
     review = get_object_or_404(Review, pk=review_id)
     if request.method == 'POST':
+        # If the form is submitted, validate and save the updated data.
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
-            form.save()
-            return redirect('review_list')
+            form.save()  # Save the updated review.
+            return redirect('myapp/review_list')  # Redirect to the review list page.
     else:
+        # If the request is not POST, display the form with the current review data.
         form = ReviewForm(instance=review)
     return render(request, 'myapp/update_review.html', {'form': form})
 
+# View for deleting a review.
 @login_required
 def delete_review(request, review_id):
+    # Get the review by its ID or return a 404 error if it doesn't exist.
     review = get_object_or_404(Review, pk=review_id)
 
-    # Optional: prevent users from deleting others' reviews
+    # Optional: Prevent users from deleting reviews they don't own unless they are staff.
     if review.author != request.user and not request.user.is_staff:
         return HttpResponseForbidden("You are not allowed to delete this review.")
 
     if request.method == 'POST':
+        # If the form is submitted, delete the review and redirect to the review list.
         review.delete()
-        return redirect('review_list')
+        return redirect('myapp/review_list')
     
+    # Render a confirmation page before deleting.
     return render(request, 'myapp/delete_review.html', {'review': review})
 
+# View for listing all reviews.
 def review_list(request):
+    # Get all reviews from the database.
     reviews = Review.objects.all()
     return render(request, 'myapp/review_list.html', {'reviews': reviews})
 
+# View for displaying the details of a specific review.
 @login_required
 def review_detail(request, review_id):
+    # Get the review by its ID or return a 404 error if it doesn't exist.
     review = get_object_or_404(Review, pk=review_id)
+    # Get all comments related to this review.
     comments = Comment.objects.filter(review=review)
 
     if request.method == 'POST':
+        # If the form is submitted, validate and save the comment.
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.review = review
-            comment.user = request.user
+            comment.review = review  # Link the comment to the review.
+            comment.user = request.user  # Set the current user as the author of the comment.
             comment.save()
             return redirect('myapp/review_detail.html', review_id=review.id)
     else:
+        # If the request is not POST, display an empty comment form.
         form = CommentForm()
 
     return render(request, 'myapp/review_detail.html', {
@@ -81,78 +101,71 @@ def review_detail(request, review_id):
         'comments': comments
     })
 
+# View for returning all comments for a specific review as JSON.
 def review_comments_json(request, review_id):
     """
     This function gets all the comments for a specific review and sends them back as JSON.
-    - First, it finds the review using the review_id. If it doesn’t exist, it shows a 404 error.
-    - Then, it grabs all the comments for that review and sorts them by the newest ones first.
-    - After that, it converts the comments into a list of dictionaries with the username, text, and date.
-    - Finally, it sends the list back as a JSON response.
-
-    Why: This is super useful for loading comments dynamically on the frontend without refreshing the page.
+    - Useful for dynamically loading comments on the frontend without refreshing the page.
     """
-    review = get_object_or_404(Review, pk=review_id)  # Look for the review. If it’s not there, show a 404 error.
-    comments = Comment.objects.filter(review=review).order_by('-created_at')  # Get all comments for the review, newest first.
-    comment_list = list(comments.values('user__username', 'text', 'created_at'))  # Turn the comments into a list of dictionaries.
-    return JsonResponse({'comments': comment_list})  # Send the list as JSON so the frontend can use it.
+    review = get_object_or_404(Review, pk=review_id)  # Get the review or return a 404 error.
+    comments = Comment.objects.filter(review=review).order_by('-created_at')  # Get all comments, newest first.
+    comment_list = list(comments.values('user__username', 'text', 'created_at'))  # Convert comments to a list of dictionaries.
+    return JsonResponse({'comments': comment_list})  # Return the comments as JSON.
 
-
-@csrf_exempt  # This skips CSRF checks (not safe for production, but okay for testing).
-@login_required  # Only logged-in users can use this function.
+# View for adding a comment using AJAX.
+@login_required
 def add_comment_ajax(request, review_id):
     """
     This function lets users add a new comment to a review using AJAX.
-    - It only works if the request is a POST request.
-    - It expects the comment text to be sent in JSON format.
-    - It checks if the comment is valid (e.g., not too short).
-    - If valid, it creates a new comment linked to the review and the user.
-    - Then, it sends back a success message with the new comment details or an error if something went wrong.
-
-    Why: This makes it easier for users to add comments without refreshing the page.
+    - Makes the process faster and avoids page reloads.
     """
-    if request.method == 'POST':  # Make sure it’s a POST request.
+    if request.method == 'POST':  # Ensure the request is POST.
         try:
-            data = json.loads(request.body)  # Get the JSON data from the request body.
+            data = json.loads(request.body)  # Parse the JSON data from the request.
             text = data.get('text')  # Extract the comment text.
 
-            # Check if the comment text is valid.
-            if not text or len(text.strip()) < 3:  # If the comment is empty or too short, show an error.
+            # Validate the comment text.
+            if not text or len(text.strip()) < 3:  # Check if the comment is too short.
                 return JsonResponse({'error': 'Comment too short'}, status=400)
 
-            # Find the review. If it doesn’t exist, show a 404 error.
+            # Get the review or return a 404 error.
             review = get_object_or_404(Review, pk=review_id)
 
-            # Create a new comment and link it to the review and the logged-in user.
+            # Create and save the new comment.
             comment = Comment.objects.create(
                 review=review,
                 user=request.user,
                 text=text
             )
 
-            # Send back a success response with the new comment details.
+            # Return the new comment details as JSON.
             return JsonResponse({
                 'success': True,
                 'comment': {
-                    'user': request.user.username,  # The username of the person who wrote the comment.
-                    'text': comment.text,  # The actual comment text.
-                    'created_at': str(comment.created_at)  # When the comment was created.
+                    'user': request.user.username,
+                    'text': comment.text,
+                    'created_at': str(comment.created_at)
                 }
             })
         except Exception as e:
-            # If something unexpected happens, send back an error message.
+            # Handle unexpected errors.
             return JsonResponse({'error': str(e)}, status=400)
 
+# View for user registration.
 def register(request):
     if request.method == 'POST':
+        # If the form is submitted, validate and save the user.
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('review_list')
+            user = form.save()  # Save the new user.
+            login(request, user)  # Log the user in automatically.
+            return redirect('myapp/review_list')  # Redirect to the review list page.
     else:
+        # If the request is not POST, display an empty registration form.
         form = RegisterForm()
     return render(request, 'myapp/register.html', {'form': form})
 
+# Simple views for rendering static pages.
 def index(request):
     return render(request, 'myapp/index.html')
 
