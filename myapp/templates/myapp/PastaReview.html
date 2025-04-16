@@ -31,10 +31,10 @@
         </ol>
     
     </div>
-    <div class = changePage>
-        <a href="PizzaReview.html"><button class="arrow prev-arrow">&lt;</a></button>
-        <a href="index.html"><button class="returnHomeButton"><img src = "../Images/home.png"></a></button>
-        <a href="CroqMonsieur.html"><button class="arrow next-arrow">></a></button>
+    <div class="changePage">
+        <a href="{% url 'PizzaReview' %}"><button class="arrow prev-arrow">&lt;</button></a>
+        <a href="{% url 'index' %}"><button class="returnHomeButton"><img src="{% static 'images/home.png' %}" alt="Home"></button></a>
+        <a href="{% url 'CroqMonsieur' %}"><button class="arrow next-arrow">&gt;</button></a>
     </div>
     </div>
  </body>

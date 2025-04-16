@@ -41,10 +41,11 @@
             </div>
         </div>
     <div>
-        <div class = box id="changePage">
-            <a href="Archer.html"><button class="arrow prev-arrow">&lt;</a></button>
-            <a href="index.html"><button class="returnHomeButton"><img src = "../Images/home.png"></a></button>
-            <a href="ASIP_Review.html"><button class="arrow next-arrow">></a></button>
+        <div class="box" id="changePage">
+            <a href="{% url 'archer' %}"><button class="arrow prev-arrow">&lt;</button></a>
+            <a href="{% url 'index' %}"><button class="returnHomeButton"><img src="{% static 'images/home.png' %}" alt="Home"></button></a>
+            <a href="{% url 'asip' %}"><button class="arrow next-arrow">&gt;</button></a>
         </div>
 </body>
 </html>
+``` 

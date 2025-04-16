@@ -55,10 +55,10 @@
             <img src="../Images/Cú_Chulainn_Coaster_Arial_View.jpg" alt="tayto_park">
         </div>
     </div>
-    <div id = changePage>
-        <a href="Futuroscope.html"><button class="arrow prev-arrow">&lt;</a></button>
-        <a href="index.html"><button class="returnHomeButton"><img src = "../Images/home.png"></a></button>
-        <a href="Parc_Asterix.html"><button class="arrow next-arrow">></a></button>
+    <div id="changePage">
+        <a href="{% url 'futuroscope' %}"><button class="arrow prev-arrow">&lt;</button></a>
+        <a href="{% url 'index' %}"><button class="returnHomeButton"><img src="{% static 'images/home.png' %}" alt="Home"></button></a>
+        <a href="{% url 'Parc_Asterix' %}"><button class="arrow next-arrow">&gt;</button></a>
     </div>
 </body>
 

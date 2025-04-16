@@ -57,10 +57,10 @@
             <img src="../Images/sebastien_loeb2.webp" alt="tayto_park">
         </div>
     </div>
-    <div id = changePage>
-        <a href="Parc_Asterix.html"><button class="arrow prev-arrow">&lt;</a></button>
-        <a href="index.html"><button class="returnHomeButton"><img src = "../Images/home.png"></a></button>
-        <a href="TaytoPark_Review.html"><button class="arrow next-arrow">></a></button>
+    <div id="changePage">
+        <a href="{% url 'Parc_Asterix' %}"><button class="arrow prev-arrow">&lt;</button></a>
+        <a href="{% url 'index' %}"><button class="returnHomeButton"><img src="{% static 'images/home.png' %}" alt="Home"></button></a>
+        <a href="{% url 'tayto' %}"><button class="arrow next-arrow">&gt;</button></a>
     </div>
 </body>
 
