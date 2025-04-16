@@ -182,3 +182,6 @@ def PizzaReview(request):
 
 def CroqMonsieur(request):
     return render(request, 'myapp/CroqMonsieur.html')
+
+def base(request):
+    return render(request, 'myapp/base.html')

@@ -1,21 +1,44 @@
+<!-- Check if the user is a staff member -->
+<!-- This ensures that only staff members can access this page. 
+     It's a security measure to prevent unauthorized users from creating reviews. -->
 {% if request.user.is_staff %}
+  <!-- Page heading -->
+  <!-- Displays a heading to indicate the purpose of the page -->
   <h2>Create Review</h2>
+
+  <!-- Form for creating a review -->
+  <!-- The form uses the POST method to securely send data to the server. 
+       The 'id' is used to reference the form in JavaScript. -->
   <form method="post" id="create-review-form">
+      <!-- CSRF token for security -->
+      <!-- This is a Django-provided token to protect against Cross-Site Request Forgery attacks. -->
       {% csrf_token %}
+      
+      <!-- Render the form fields -->
+      <!-- 'form.as_p' renders the form fields as paragraphs for better readability. -->
       {{ form.as_p }}
+      
+      <!-- Submit button -->
+      <!-- Allows the user to submit the form. -->
       <button type="submit">Submit</button>
   </form>
 
+  <!-- JavaScript for client-side validation -->
+  <!-- This script ensures that the 'rating' field has a value between 1 and 5 before submitting the form. 
+       It's to catch errors before sending data to the server. -->
   <script>
     document.getElementById('create-review-form').addEventListener('submit', function(e) {
       let rating = document.querySelector('[name="rating"]').value;
       if (rating < 1 || rating > 5) {
         alert("Rating must be between 1 and 5!");
-        e.preventDefault();
+        e.preventDefault(); 
       }
     });
   </script>
 
+<!-- Message for non-staff users -->
+<!-- If the user is not a staff member, display a message instead of the form. 
+     This ensures that unauthorized users cannot access the review creation functionality. -->
 {% else %}
   <p>This section is for staff only.</p>
 {% endif %}
