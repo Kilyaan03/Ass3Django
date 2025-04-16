@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, HttpResponseForbidden,JsonResponse
-from .forms import ReviewForm, CommentForm,RegisterForm, UserProfileForm
+from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
+from .forms import ReviewForm, CommentForm, RegisterForm, UserProfileForm
 from .models import Review, Comment
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.contrib.auth import login, authenticate
+
 # Create your views here.
 
 # This is a simple view that returns a plain text response.
@@ -26,7 +27,7 @@ def create_review(request):
             return redirect('review_list')
     else:
         form = ReviewForm()
-    return render(request, 'create_review.html', {'form': form})
+    return render(request, 'myapp/create_review.html', {'form': form})
 
 @login_required
 def update_review(request, review_id):
@@ -38,7 +39,7 @@ def update_review(request, review_id):
             return redirect('review_list')
     else:
         form = ReviewForm(instance=review)
-    return render(request, 'update_review.html', {'form': form})
+    return render(request, 'myapp/update_review.html', {'form': form})
 
 @login_required
 def delete_review(request, review_id):
@@ -52,11 +53,11 @@ def delete_review(request, review_id):
         review.delete()
         return redirect('review_list')
     
-    return render(request, 'delete_review.html', {'review': review})
+    return render(request, 'myapp/delete_review.html', {'review': review})
 
 def review_list(request):
     reviews = Review.objects.all()
-    return render(request, 'review_list.html', {'reviews': reviews})
+    return render(request, 'myapp/review_list.html', {'reviews': reviews})
 
 @login_required
 def review_detail(request, review_id):
@@ -70,11 +71,11 @@ def review_detail(request, review_id):
             comment.review = review
             comment.user = request.user
             comment.save()
-            return redirect('review_detail', review_id=review.id)
+            return redirect('myapp/review_detail.html', review_id=review.id)
     else:
         form = CommentForm()
 
-    return render(request, 'review_detail.html', {
+    return render(request, 'myapp/review_detail.html', {
         'review': review,
         'form': form,
         'comments': comments
@@ -150,4 +151,4 @@ def register(request):
             return redirect('review_list')
     else:
         form = RegisterForm()
-    return render(request, 'register.html', {'form': form})
+    return render(request, 'myapp/register.html', {'form': form})
