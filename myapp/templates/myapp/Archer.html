@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archer_Review</title>
+    <link rel="stylesheet" href="{% static 'css/TV_Style.css' %}">
+</head>
+<body>
+        <h1>Archer Review</h1>
+    <div class="main">
+        <div class="left-content">
+            <div class="box" id="video-synopsis">
+                <div class="video-container">
+                    <iframe width="927" height="695" src="https://www.youtube.com/embed/_4jxLxZrMfs" title="M as in Mancy.wmv" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="synopsis-text">
+                    <h2>Synopsis</h2>
+                    <p>Archer is an animated spy comedy about Sterling Archer, a suave but incredibly self-absorbed and incompetent secret agent.  Working for ISIS (later the Figgis Agency), a spy agency run by his overbearing mother, Malory Archer, Sterling navigates dangerous missions with a complete lack of awareness.  He's surrounded by a dysfunctional cast of characters, including Lana Kane, his fiercely independent and exasperated ex-girlfriend; Cyril Figgis, the timid comptroller and Lana's husband (for a while); Pam Poovey, the agency's overweight and gossipy HR director; Cheryl Tunt, the unstable and pyromaniac secretary; and Ray Gillette, the openly gay and often injured field agent.  Archer's missions are frequently sidelined by his own personal issues, his complicated relationship with his mother, and his constant pursuit of women.  The show is known for its rapid-fire dialogue, witty banter, pop culture references, and absurd humor.  Over the seasons, the show has reinvented itself, shifting settings and storylines, but always maintaining its core comedic style.</p>
+                </div>
+            </div>
+            
+            
+            <div class="box" id="review">
+                <h2>Review</h2>
+                <p><b>My Review:</b> "Archer" is hands down one of the smartest and funniest animated shows out there. The mix of spy action, rapid-fire dialogue, and dark humor makes it incredibly unique. The show constantly reinvents itself, from classic spy missions to film noir and space adventures, which keeps it fresh season after season. The writing is packed with witty banter, inside jokes, and running gags that never get old. If you love fast-paced humor with a side of ridiculous action, this show is for you.</p>
+
+<p><b>Best Episodes:</b> There are so many great episodes, but a few of my all-time favorites have to be <em>"Placebo Effect"</em> (Archer taking down fake cancer meds with a vengeance is peak insanity), <em>"Vision Quest"</em> (the gang trapped in an elevator leads to pure chaos), and <em>"The Limited"</em> (a high-speed train mission filled with non-stop ridiculousness). Honestly, you can’t go wrong with any episode from the earlier seasons.</p>
+
+<p><b>Best Line:</b> The show is packed with iconic one-liners, but one of the best has to be: <em>"Do you want ants? Because that’s how you get ants!"</em> It’s such a simple line, but the way it became a recurring joke throughout the series makes it legendary.</p>
+
+<p><b>Favorite Actor:</b> H. Jon Benjamin as Sterling Archer is absolutely perfect. His deadpan delivery and impeccable comedic timing bring the character to life in a way that no one else could. His voice is so recognizable that it’s impossible not to laugh whenever he speaks, whether it’s in "Archer" or "Bob’s Burgers." He’s a huge reason why the show is as good as it is.</p>
+
+            </div>
+
+        </div>
+            <div class="box" id="imdb">
+                <h2>Actors & Actresses</h2>
+                <iframe src="https://www.themoviedb.org/tv/10283-archer/cast" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    <div>
+        <div class="box" id="changePage">
+            <a href="{% url 'asip' %}"><button class="arrow prev-arrow">&lt;</button></a>
+            <a href="{% url 'index' %}"><button class="returnHomeButton"><img src="{% static 'images/home.png' %}" alt="Home"></button></a>
+            <a href="{% url 'monk' %}"><button class="arrow next-arrow">&gt;</button></a>
+        </div>
+</body>
+</html>
+``` 

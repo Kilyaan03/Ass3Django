@@ -55,7 +55,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -67,6 +67,13 @@ TEMPLATES = [
         },
     },
 ]
+
+
+
+# static files
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'myapp' / 'static']
+
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 

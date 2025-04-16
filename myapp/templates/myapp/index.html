@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kilian's Review Site</title>
+    <link rel="stylesheet" href="{% static 'css/Style.css' %}">
+    <script src="{% static 'js/index.js' %}" defer></script>
+</head>
+<body>
+    <div id="menuBar">
+        <h1>Menu Bar</h1>
+        <h2 class="menu-header" data-target="movies-options">Movies ▽</h2>
+        <div id="movies-options" class="menu-options">
+            <div class="menu-item" data-url="{% url 'asip' %}">◦ASIP</div>
+            <div class="menu-item" data-url="{% url 'archer' %}">◦Archer</div>
+            <div class="menu-item" data-url="{% url 'monk' %}">◦Monk</div>
+        </div>
+        <h2 class="menu-header" data-target="food-options">Food▽</h2>
+        <div id="food-options" class="menu-options">
+            <div class="menu-item" data-url="{% url 'PizzaReview' %}">◦Pizza</div>
+            <div class="menu-item" data-url="{% url 'PastaReview' %}">◦Pasta</div>
+            <div class="menu-item" data-url="{% url 'CroqMonsieur' %}">◦Croque Monsieur</div>
+        </div>
+        <h2 class="menu-header" data-target="themeparks-options">Theme Parks▽</h2>
+        <div id="themeparks-options" class="menu-options">
+            <div class="menu-item" data-url="{% url 'tayto' %}">◦Tayto Park</div>
+            <div class="menu-item" data-url="{% url 'Parc_Asterix' %}">◦Parc Asterix</div>
+            <div class="menu-item" data-url="{% url 'futuroscope' %}">◦Futuroscope</div>
+        </div>
+    </div>
+    <!-- The outer div is used to group all the content together for styling and layout purposes -->
+    <div id="container">
+        <div id="menuButtonContainer">
+            <button id="menuButton"><img src="{% static 'images/menuButton.png' %}" alt="menu button" width="100px" height="100px"></button>
+        </div>
+        <div class="title">
+            <!-- This div is used to group the title, image, and introductory text together -->
+            <h1>Kilian's Review Website</h1>
+            <img src="{% static 'images/kilian.jpg' %}" alt="kilian" width="200px" height="250px">
+            <h1>Why listen to me?</h1>
+            <p>I'm one of the smartest persons in the universe</p>
+        </div>
+    </div>
+
+    <h1>Movies</h1>
+    <div class="topicList">
+        <!-- This div is used to group the movie review links and navigation buttons together -->
+        <button class="arrow prev-arrow">&lt;</button>
+        <a href="{% url 'asip' %}"><img src="{% static 'images/ASIP.webp' %}" alt="Always Sunny In Philadelphia" width="100"></a>
+        <a href="{% url 'archer' %}"><img src="{% static 'images/archer.jpg' %}" alt="Archer" width="100"></a>
+        <a href="{% url 'monk' %}"><img src="{% static 'images/monk.jpg' %}" alt="Monk" width="100"></a>
+        <button class="arrow next-arrow">&gt;</button>
+    </div>
+
+    <h1>Food</h1>
+    <div class="topicList">
+        <!-- This div is used to group the food review links and navigation buttons together -->
+        <button class="arrow prev-arrow">&lt;</button>
+        <a href="{% url 'PizzaReview' %}"><img src="{% static 'images/pizza.jpg' %}" alt="Pizza" width="100"></a>
+        <a href="{% url 'PastaReview' %}"><img src="{% static 'images/pasta.jpg' %}" alt="Pasta" width="100"></a>
+        <a href="{% url 'CroqMonsieur' %}"><img src="{% static 'images/croqueMonsieur.jpg' %}" alt="Croque Monsieur" width="100"></a>
+        <button class="arrow next-arrow">&gt;</button>
+    </div>
+
+    <h1>Theme Parks</h1>
+    <div class="topicList">
+        <!-- This div is used to group the theme park review links and navigation buttons together -->
+        <button class="arrow prev-arrow">&lt;</button>
+        <a href="{% url 'tayto' %}"><img src="{% static 'images/tayto_park.webp' %}" alt="Tayto Park" width="100"></a>
+        <a href="{% url 'Parc_Asterix' %}"><img src="{% static 'images/parc_asterix.jpg' %}" alt="Parc Asterix" width="100"></a>
+        <a href="{% url 'futuroscope' %}"><img src="{% static 'images/futuroscope.webp' %}" alt="Futuroscope" width="100"></a>
+        <button class="arrow next-arrow">&gt;</button>
+    </div>
+</body>
+</html>

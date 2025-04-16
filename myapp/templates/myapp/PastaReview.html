@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PastaReview</title>   
+    <link rel="stylesheet" href="{% static 'css/FoodStyle.css' %}">
+</head>
+<body>
+    <div class="main">
+    <h1>Pasta Review</h1>
+       
+        <h2>Thoughts</h2>
+        <div class = "thoughts">
+        <p>Not a fan of pasta so probably not a good reviewer.</p>
+        <p>I do like that it comes in lots of different shapes and even colours.</p>
+        <p>I don't know any pasta games.</p>
+        <p>Penne sounds funny.</p>
+    </div>
+        <h2>Rankings</h2>
+        <div class = "rankings">
+            
+        <img src = "../Images/Will_Smith_Eating_Spaghetti.gif">
+        <ol>
+            <li>Pesto</li>
+            <li>Farfalle</li>
+            <li>Fusilli</li>
+            <li>Penne</li>
+            <li>Spighe</li>
+        </ol>
+    
+    </div>
+    <div class = changePage>
+        <a href="PizzaReview.html"><button class="arrow prev-arrow">&lt;</a></button>
+        <a href="index.html"><button class="returnHomeButton"><img src = "../Images/home.png"></a></button>
+        <a href="CroqMonsieur.html"><button class="arrow next-arrow">></a></button>
+    </div>
+    </div>
+ </body>

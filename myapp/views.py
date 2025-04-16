@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
-from .forms import ReviewForm, CommentForm, RegisterForm, UserProfileForm
+from .forms import ReviewForm, CommentForm, RegisterForm
 from .models import Review, Comment
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 import json
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login
 
 # Create your views here.
 
@@ -152,3 +152,33 @@ def register(request):
     else:
         form = RegisterForm()
     return render(request, 'myapp/register.html', {'form': form})
+
+def index(request):
+    return render(request, 'myapp/index.html')
+
+def archer(request):
+    return render(request, 'myapp/Archer.html')
+
+def monk(request):
+    return render(request, 'myapp/Monk.html')
+
+def asip(request):
+    return render(request, 'myapp/ASIP_Review.html')
+
+def tayto(request):
+    return render(request, 'myapp/TaytoPark_Review.html')
+
+def futuroscope(request):
+    return render(request, 'myapp/Futuroscope.html')
+
+def Parc_Asterix(request):
+    return render(request, 'myapp/Parc_Asterix.html')
+
+def PastaReview(request):
+    return render(request, 'myapp/PastaReview.html')
+
+def PizzaReview(request):
+    return render(request, 'myapp/PizzaReview.html')
+
+def CroqMonsieur(request):
+    return render(request, 'myapp/CroqMonsieur.html')

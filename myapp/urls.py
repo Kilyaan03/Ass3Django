@@ -3,7 +3,16 @@ from . import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('', views.review_list, name='review_list'),
+    path('', views.index, name='index'),
+    path('archer/', views.archer, name='archer'),
+    path('monk/', views.monk, name='monk'),
+    path('asip/', views.asip, name='asip'),
+    path('tayto/', views.tayto, name='tayto'),
+    path('futuroscope/', views.futuroscope, name='futuroscope'),
+    path('Parc_Asterix/', views.Parc_Asterix, name='Parc_Asterix'),
+    path('PastaReview/', views.PastaReview, name='PastaReview'),
+    path('PizzaReview/', views.PizzaReview, name='PizzaReview'),
+    path('CroqMonsieur/', views.CroqMonsieur, name='CroqMonsieur'),
     path('review/create/', views.create_review, name='create_review'),
     path('review/<int:review_id>/edit/', views.update_review, name='update_review'),
     path('review/<int:review_id>/delete/', views.delete_review, name='delete_review'),

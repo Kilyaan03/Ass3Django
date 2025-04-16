@@ -1,0 +1,82 @@
+/*Very similar to Style.css and TV_Style.css so wont comment everyhting*/
+.thoughts{
+    display: block; /* block display is like it makes an element take up the full width of its container and stack vertically, starting on a new line.*/
+    border: 5px solid black; /*adds border around the thoughts class*/
+    width:fit-content;
+    margin: 0 auto; /*centers the div horizontally*/
+    border-radius: 10px; /*adds rounded corners to the border*/
+    background-color: antiquewhite;
+    text-align: center;
+}
+
+p{
+    
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.rankings img{
+    width: 250px;
+    height: 250px;
+}
+
+h2 {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    font-style: italic;
+}
+
+.rankings{
+    display: flex;
+    max-width: 30%;
+    position: relative;
+    gap: 20px;
+    margin-left: 35%;
+    margin-right: 35%;
+}
+
+li{
+    font-size: x-large ;
+    margin-bottom: 10px ;
+    font-family: 'Lucida Sans', Geneva, Verdana, sans-serif; /*adds specific font*/
+
+}
+
+body {
+    background-color: aliceblue;
+}
+
+.arrow {
+    background-color: antiquewhite;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 10px 15px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.changePage {
+    display: flex;
+    justify-content: center; /* Centers items horizontally */
+    align-items: center; /* Centers items vertically */
+    width: fit-content; /* Ensures the div only takes as much space as needed */
+    margin: 0 auto; /* Centers the div itself */
+    text-align: center;
+    margin-top: 10%; /*pushes element down 10% of its hight*/
+}
+
+.returnHomeButton{
+    font-size: 50px;
+    background-color: antiquewhite;
+    border-radius: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.returnHomeButton img {
+    width: 40px;
+    height: 40px;
+  }
