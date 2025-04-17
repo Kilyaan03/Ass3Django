@@ -2,6 +2,9 @@ from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
 
+#urls.py is used to match the URL a user visits to a specific function in views.py. That function then runs and returns the right page or data. 
+# Inside the view, I can check whether the request is a GET (just viewing) or a POST (submitting something like a form) and respond accordingly.
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('archer/', views.archer, name='archer'),
@@ -24,5 +27,5 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page='index'), name='logout'),
     path('base/', views.base, name='base'),
     path('review_list', views.review_list, name='review_list'),
-    path('index', views.index, name='index'),
+    path('index', views.index, name='index'),# I had issues getting log out to work with just '' it would reset to admin for some reason so added another 'index'.
 ]
