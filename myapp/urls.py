@@ -2,6 +2,9 @@ from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
 
+#urls.py is used to match the URL a user visits to a specific function in views.py. That function then runs and returns the right page or data. 
+# Inside the view, I can check whether the request is a GET (just viewing) or a POST (submitting something like a form) and respond accordingly.
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('archer/', views.archer, name='archer'),

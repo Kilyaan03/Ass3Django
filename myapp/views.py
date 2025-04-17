@@ -3,7 +3,6 @@ from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
 from .forms import ReviewForm, CommentForm, RegisterForm
 from .models import Review, Comment
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
 import json
 from django.contrib.auth import login
 
@@ -24,7 +23,7 @@ def create_review(request):
         # If the form is submitted, validate the data.
         form = ReviewForm(request.POST)
         if form.is_valid():
-            # Save the review but don't commit yet (to add the author).
+            # Save the review but don't commit yet so can add the author.
             review = form.save(commit=False)
             review.author = request.user  # Set the current user as the author.
             review.save()  # Save the review to the database.
