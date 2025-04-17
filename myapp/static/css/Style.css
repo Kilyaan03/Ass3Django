@@ -125,3 +125,47 @@ h1 {
     background-color: rgb(214, 211, 240,0.8); /* Changes opacity of background color on hover */
 }
 
+/* Styles for the "Other Reviews" section */
+.review-list {
+    list-style-type: none; /* Remove default bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 20px auto; /* Center the list and add spacing */
+    max-width: 800px; /* Limit the width of the list */
+    background-color: #D6D3F0; /* background for the list */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow for depth */
+    padding: 20px; /* Add padding inside the list */
+}
+
+.review-item {
+    padding: 10px 0; /* Add spacing between items */
+    border-bottom: 1px solid #ccc; /* Add a divider between items */
+    font-size: 1.2em; /* Slightly larger font size */
+    color: #333; 
+}
+
+.review-item:last-child {
+    border-bottom: none; /* Remove the divider for the last item */
+}
+
+.review-category {
+    font-style: italic; /* Italicize the category */
+    color: #555; /* color for the category */
+}
+
+.review-rating {
+    font-weight: bold; 
+    color: #6B5CA5; 
+}
+
+.review-link {
+    margin-left: 10px; /* Add spacing before the link */
+    text-decoration: none; /* Remove underline */
+    color: #007BFF; /* Blue color for the link */
+    font-weight: bold; /* Make the link bold */
+}
+
+.review-link:hover {
+    text-decoration: underline; /* Add underline on hover */
+    color: #0056b3; /* Darker blue on hover */
+}

@@ -78,5 +78,16 @@
         <a href="{% url 'futuroscope' %}"><img src="{% static 'images/futuroscope.webp' %}" alt="Futuroscope" width="100"></a>
         <button class="arrow next-arrow">&gt;</button>
     </div>
+    <h1>Other Reviews</h1>
+    <ul class="review-list">
+    {% for review in reviews %}
+        <li class="review-item">
+            <strong>{{ review.title }}</strong>
+            <span class="review-category">({{ review.category.name }})</span>
+            - Rated <span class="review-rating">{{ review.rating }}/5</span>
+            <a href="review/{{ review.id }}/" class="review-link">Read More</a>
+        </li>
+    {% endfor %}
+    </ul>
 </body>
 </html>
