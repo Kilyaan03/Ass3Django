@@ -75,7 +75,7 @@ def review_list(request):
     return render(request, 'myapp/review_list.html', {'reviews': reviews})
 
 # View for displaying the details of a specific review.
-@login_required
+
 def review_detail(request, review_id):
     # Get the review by its ID or return a 404 error if it doesn't exist.
     review = get_object_or_404(Review, pk=review_id)
@@ -113,7 +113,7 @@ def review_comments_json(request, review_id):
     return JsonResponse({'comments': comment_list})  # Return the comments as JSON.
 
 # View for adding a comment using AJAX.
-@login_required
+
 def add_comment_ajax(request, review_id):
     """
     This function lets users add a new comment to a review using AJAX.
@@ -167,7 +167,8 @@ def register(request):
 
 # Simple views for rendering static pages.
 def index(request):
-    return render(request, 'myapp/index.html')
+    reviews = Review.objects.all()  # Fetch all reviews
+    return render(request, 'myapp/index.html', {'reviews': reviews})
 
 def archer(request):
     return render(request, 'myapp/Archer.html')

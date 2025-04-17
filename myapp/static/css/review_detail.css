@@ -1,0 +1,94 @@
+/* This sets the default font, background color, and text color for the entire page */
+body {
+    font-family: Arial, sans-serif; /* Use a simple, readable font */
+    background-color: #f9f9f9; /* Light gray background for better readability */
+    color: #333; /* Dark gray text color */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+/* This styles the box that contains the review details */
+.review-container {
+    max-width: 800px; /* Limit the width of the container */
+    margin: 20px auto; /* Center the container and add vertical spacing */
+    padding: 10px; /* Add space inside the container */
+    background-color: #fff; /* White background for contrast */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px; /* Rounded corners for a softer look */
+}
+
+.review-container h2 {
+    text-align: center; /* Center the title text */
+}
+
+/* Highlight the review rating with red */
+.review-rating {
+    color: #e71515; 
+    font-weight: bold; /* Make the text bold */
+}
+
+
+/* This adds spacing between sections without a visible line */
+.divider {
+    margin: 20px 0; /* Add vertical spacing */
+    border: none; /* Remove the default border line */
+}
+
+/* This styles the box that contains the comments section */
+.comments-container {
+    max-width: 800px; /* Limit the width of the container */
+    margin: 20px auto; /* Center the container and add vertical spacing */
+    padding: 10px; /* Add space inside the container */
+    background-color: #fff; /* White background for contrast */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px; /* Rounded corners for a softer look */
+}
+
+/* This removes the default list styling and adds spacing between comments */
+.comment-list {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 10px 0; /* Add vertical spacing */
+}
+
+/* This styles each comment in the list */
+.comment-item {
+    padding: 5px 0; /* Add vertical spacing inside each comment */
+    border-bottom: 1px solid #ddd; /* Light gray line between comments */
+}
+
+/* Loading message styling */
+/* This styles the "Loading comments..." message */
+.loading-message {
+    color: #555; /* Medium gray text color */
+    font-style: italic; /* Italicize the text */
+}
+
+/* This styles the form where users can add a new comment */
+.comment-form {
+    margin-top: 10px; /* Add spacing above the form */
+}
+
+/* This styles the textbox where users type their comments */
+#comment-text {
+    width: 100%; /* Make the textbox take up the full width of the container */
+    padding: 5px; /* Add space inside the textbox */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px; /* Rounded corners for a softer look */
+}
+
+/* This styles the "Post Comment" button */
+.submit-button {
+    margin-top: 5px; /* Add spacing above the button */
+    padding: 5px 10px; /* Add space inside the button */
+    background-color: #6B5CA5; /* Purple background color */
+    color: white; /* White text color */
+    border: none; /* Remove the default border */
+    cursor: pointer; /* Change the cursor to a pointer on hover */
+    border-radius: 5px; /* Rounded corners for a softer look */
+}
+
+/* This changes the button color when the user hovers over it */
+.submit-button:hover {
+    background-color: #5a4a94; 
+}
