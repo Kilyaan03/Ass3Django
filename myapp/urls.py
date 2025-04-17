@@ -24,5 +24,5 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page='index'), name='logout'),
     path('base/', views.base, name='base'),
     path('review_list', views.review_list, name='review_list'),
-    path('index', views.index, name='index'),
+    path('index', views.index, name='index'),# I had issues getting log out to work with just '' it would reset to admin for some reason so added another 'index'.
 ]
